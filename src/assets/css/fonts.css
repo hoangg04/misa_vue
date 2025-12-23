@@ -1,0 +1,161 @@
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("https://amisplatform.misacdn.net/apps/recruit/assets/fonts/Inter/web/Inter-Thin.woff2?v=4.1")
+    format("woff2");
+}
+
+@font-face {
+  font-family: Inter;
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("https://amisplatform.misacdn.net/apps/recruit/assets/fonts/Inter/web/Inter-ThinItalic.woff2?v=4.1")
+    format("woff2");
+}
+
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("https://amisplatform.misacdn.net/apps/recruit/assets/fonts/Inter/web/Inter-ExtraLight.woff2?v=4.1")
+    format("woff2");
+}
+
+@font-face {
+  font-family: Inter;
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("https://amisplatform.misacdn.net/apps/recruit/assets/fonts/Inter/web/Inter-ExtraLightItalic.woff2?v=4.1")
+    format("woff2");
+}
+
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("https://amisplatform.misacdn.net/apps/recruit/assets/fonts/Inter/web/Inter-Light.woff2?v=4.1")
+    format("woff2");
+}
+
+@font-face {
+  font-family: Inter;
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("https://amisplatform.misacdn.net/apps/recruit/assets/fonts/Inter/web/Inter-LightItalic.woff2?v=4.1")
+    format("woff2");
+}
+
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("https://amisplatform.misacdn.net/apps/recruit/assets/fonts/Inter/web/Inter-Regular.woff2?v=4.1")
+    format("woff2");
+}
+
+@font-face {
+  font-family: Inter;
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("https://amisplatform.misacdn.net/apps/recruit/assets/fonts/Inter/web/Inter-Italic.woff2?v=4.1")
+    format("woff2");
+}
+
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("https://amisplatform.misacdn.net/apps/recruit/assets/fonts/Inter/web/Inter-Medium.woff2?v=4.1")
+    format("woff2");
+}
+
+@font-face {
+  font-family: Inter;
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("https://amisplatform.misacdn.net/apps/recruit/assets/fonts/Inter/web/Inter-MediumItalic.woff2?v=4.1")
+    format("woff2");
+}
+
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("https://amisplatform.misacdn.net/apps/recruit/assets/fonts/Inter/web/Inter-SemiBold.woff2?v=4.1")
+    format("woff2");
+}
+
+@font-face {
+  font-family: Inter;
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url("https://amisplatform.misacdn.net/apps/recruit/assets/fonts/Inter/web/Inter-SemiBoldItalic.woff2?v=4.1")
+    format("woff2");
+}
+
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("https://amisplatform.misacdn.net/apps/recruit/assets/fonts/Inter/web/Inter-Bold.woff2?v=4.1")
+    format("woff2");
+}
+
+@font-face {
+  font-family: Inter;
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("https://amisplatform.misacdn.net/apps/recruit/assets/fonts/Inter/web/Inter-BoldItalic.woff2?v=4.1")
+    format("woff2");
+}
+
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("https://amisplatform.misacdn.net/apps/recruit/assets/fonts/Inter/web/Inter-ExtraBold.woff2?v=4.1")
+    format("woff2");
+}
+
+@font-face {
+  font-family: Inter;
+  font-style: italic;
+  font-weight: 800;
+  font-display: swap;
+  src: url("https://amisplatform.misacdn.net/apps/recruit/assets/fonts/Inter/web/Inter-ExtraBoldItalic.woff2?v=4.1")
+    format("woff2");
+}
+
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("https://amisplatform.misacdn.net/apps/recruit/assets/fonts/Inter/web/Inter-Black.woff2?v=4.1")
+    format("woff2");
+}
+
+@font-face {
+  font-family: Inter;
+  font-style: italic;
+  font-weight: 900;
+  font-display: swap;
+  src: url("https://amisplatform.misacdn.net/apps/recruit/assets/fonts/Inter/web/Inter-BlackItalic.woff2?v=4.1")
+    format("woff2");
+}

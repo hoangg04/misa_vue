@@ -1,0 +1,270 @@
+* {
+  font-family: Inter, Helvetica, Arial, sans-serif !important;
+  font-synthesis: none;
+}
+
+/* Main Content */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  overflow: hidden;
+  height: calc(100vh - 48px);
+  background-color: #ebecef;
+}
+
+.main__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.main__header-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.main__header-actions {
+  display: flex;
+  align-items: center;
+  height: 36px;
+}
+.main__header-actions-add {
+  border-radius: 4px 0 0 4px;
+}
+.main__header-actions-add span {
+  font-weight: 600;
+  font-size: 14px !important;
+}
+.main__header-actions-down {
+  border-radius: 0 4px 4px 0;
+  width: 40px;
+  padding: 0;
+  border-left: 1px solid #176cd1;
+}
+
+.main__btn {
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.main__toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.main__toolbar-btn {
+  width: 35px;
+  height: 35px;
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #e0e6ec;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main__toolbar-btn:hover {
+  border-color: #2680eb;
+  background-color: #e2efff;
+}
+.main__toolbar-btn:hover .icon-default {
+  background: #2680eb !important;
+}
+
+.main__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin: 24px;
+  border-radius: 5px;
+  background-color: #fff;
+}
+.main__content-filter {
+  padding: 16px;
+  background-color: inherit;
+}
+
+/* Input search với icon AI - tái sử dụng */
+.input-search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 300px;
+}
+
+.input-search {
+  width: 100%;
+  height: 36px;
+  padding: 0 12px 0 44px;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: Inter, Helvetica, Arial, sans-serif;
+  transition: border-color 0.2s ease;
+}
+
+.input-search:focus,
+.input-search:hover {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+.input-search__icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  width: 24px;
+  height: 24px !important;
+  background-image: url('https://amisplatform.misacdn.net/apps/recruit/assets/images/ai-feature/ai-search-candidate.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.input-search__icon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://amisplatform.misacdn.net/apps/recruit/assets/images/ai-feature/ai-search-candidate-start.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+
+#table-header-checkbox,
+.table__checkbox-cell {
+  cursor: pointer;
+  position: sticky;
+  left: 0;
+  z-index: 100;
+}
+
+/* Checkbox wrapper styles - only for table checkboxes */
+.table__checkbox-wrapper {
+  width: 50px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Table checkbox input styles */
+.table-checkbox {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #2680eb;
+  border-radius: 4px;
+  border: 2px solid #7a8188;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.table-checkbox:checked {
+  background-color: #2680eb;
+  border-color: #2680eb;
+}
+
+.table-checkbox:checked::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.table-checkbox:hover {
+  border-color: #2680eb;
+}
+
+.table-checkbox:focus {
+  outline: 2px solid rgba(38, 128, 235, 0.2);
+  outline-offset: 2px;
+}
+
+
+/* Pagination */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-top: 1px solid #e5e7eb;
+  background-color: #f5f5f5 !important;
+}
+
+.pagination__info {
+  display: flex;
+  align-items: center;
+}
+
+.pagination__total {
+  font-size: 14px;
+  color: #1e2633;
+}
+
+.pagination__controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pagination__select {
+  padding: 7px 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.pagination__text {
+  font-size: 14px;
+  color: #1e2633;
+}
+
+.pagination__range {
+  font-size: 14px;
+}
+
+.pagination__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pagination__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

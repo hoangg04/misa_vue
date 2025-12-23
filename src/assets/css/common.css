@@ -1,0 +1,283 @@
+/* Display */
+.block { display: block; }
+.inline-block { display: inline-block; }
+.inline { display: inline; }
+.hidden { display: none; }
+
+/* Flex */
+.flex { display: flex; }
+.inline-flex { display: inline-flex; }
+
+.flex-row { flex-direction: row; }
+.flex-col { flex-direction: column; }
+
+.flex-wrap { flex-wrap: wrap; }
+.flex-nowrap { flex-wrap: nowrap; }
+
+.items-start { align-items: flex-start; }
+.items-center { align-items: center; }
+.items-end { align-items: flex-end; }
+.items-stretch { align-items: stretch; }
+
+.justify-start { justify-content: flex-start; }
+.justify-center { justify-content: center; }
+.justify-end { justify-content: flex-end; }
+.justify-between { justify-content: space-between; }
+.justify-around { justify-content: space-around; }
+.justify-evenly { justify-content: space-evenly; }
+
+.self-start { align-self: flex-start; }
+.self-center { align-self: center; }
+.self-end { align-self: flex-end; }
+
+.w-full { width: 100%; }
+.h-full { height: 100%; }
+
+.w-screen { width: 100vw; }
+.h-screen { height: 100vh; }
+
+.max-w-sm { max-width: 640px; }
+.max-w-md { max-width: 768px; }
+.max-w-lg { max-width: 1024px; }
+
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+.text-sm { font-size: 14px; }
+.text-base { font-size: 16px; }
+.text-lg { font-size: 18px; }
+.text-xl { font-size: 20px; }
+
+.font-normal { font-weight: 400; }
+.font-medium { font-weight: 500; }
+.font-bold { font-weight: 700; }
+
+.leading-tight { line-height: 1.25; }
+.leading-normal { line-height: 1.5; }
+.leading-loose { line-height: 1.75; }
+
+.relative { position: relative; }
+.absolute { position: absolute; }
+.fixed { position: fixed; }
+.sticky { position: sticky; }
+
+.top-0 { top: 0; }
+.right-0 { right: 0; }
+.bottom-0 { bottom: 0; }
+.left-0 { left: 0; }
+
+.border { border: 1px solid #e5e7eb; }
+.border-0 { border: 0; }
+
+.rounded { border-radius: 4px; }
+.rounded-md { border-radius: 6px; }
+.rounded-lg { border-radius: 8px; }
+.rounded-full { border-radius: 9999px; }
+
+.text-white { color: #fff; }
+.text-black { color: #000; }
+.text-gray { color: #6b7280; }
+
+
+.bg-white { background-color: #fff !important; }
+.bg-black { background-color: #000 !important; }
+.bg-gray { background-color: #f3f4f6 !important; }
+
+.cursor-pointer { cursor: pointer; }
+.select-none { user-select: none; }
+
+.overflow-hidden { overflow: hidden; }
+.overflow-auto { overflow: auto; }
+
+.flex-1 { flex: 1; }
+.flex-shrink-0 { flex-shrink: 0; }
+
+.transition {
+  transition: all 0.2s ease;
+}
+.input-text {
+  font-weight: 400;
+  font-family: Inter, Helvetica, Arial, sans-serif;
+  text-overflow: ellipsis;
+  border-radius: 3px;
+  min-height: 32px;
+  padding: 6px 16px;
+  font-size: 14px !important;
+}
+
+/* Button base */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Button variants */
+.btn-primary {
+  background-color: var(--primary);
+  color: var(--white);
+  border-color: var(--primary);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #4097ff;
+  border-color: #4097ff;
+}
+
+.btn-secondary {
+  background-color: var(--secondary);
+  color: var(--white);
+  border-color: var(--secondary);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: #545b62;
+  border-color: #545b62;
+}
+
+.btn-success {
+  background-color: var(--success);
+  color: var(--white);
+  border-color: var(--success);
+}
+
+.btn-success:hover:not(:disabled) {
+  background-color: #218838;
+  border-color: #218838;
+}
+
+.btn-danger {
+  background-color: var(--danger);
+  color: var(--white);
+  border-color: var(--danger);
+}
+
+.btn-danger:hover:not(:disabled) {
+  background-color: #c82333;
+  border-color: #c82333;
+}
+
+.btn-warning {
+  background-color: var(--warning);
+  color: var(--dark);
+  border-color: var(--warning);
+}
+
+.btn-warning:hover:not(:disabled) {
+  background-color: #e0a800;
+  border-color: #e0a800;
+}
+
+.btn-info {
+  background-color: var(--info);
+  color: var(--white);
+  border-color: var(--info);
+}
+
+.btn-info:hover:not(:disabled) {
+  background-color: #138496;
+  border-color: #138496;
+}
+
+.btn-light {
+  background-color: var(--light);
+  color: var(--dark);
+  border-color: var(--light);
+}
+
+.btn-light:hover:not(:disabled) {
+  background-color: #e2e6ea;
+  border-color: #e2e6ea;
+}
+
+.btn-dark {
+  background-color: var(--dark);
+  color: var(--white);
+  border-color: var(--dark);
+}
+
+.btn-dark:hover:not(:disabled) {
+  background-color: #23272b;
+  border-color: #23272b;
+}
+
+/* Button outline variants */
+.btn-outline-primary {
+  background-color: transparent;
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.btn-outline-primary:hover:not(:disabled) {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+.btn-outline-secondary {
+  background-color: transparent;
+  color: var(--secondary);
+  border-color: var(--secondary);
+}
+
+.btn-outline-secondary:hover:not(:disabled) {
+  background-color: var(--secondary);
+  color: var(--white);
+}
+
+.btn-outline-success {
+  background-color: transparent;
+  color: var(--success);
+  border-color: var(--success);
+}
+
+.btn-outline-success:hover:not(:disabled) {
+  background-color: var(--success);
+  color: var(--white);
+}
+
+.btn-outline-danger {
+  background-color: transparent;
+  color: var(--danger);
+  border-color: var(--danger);
+}
+
+.btn-outline-danger:hover:not(:disabled) {
+  background-color: var(--danger);
+  color: var(--white);
+}
+
+/* Button sizes */
+.btn-sm {
+  padding: 4px 12px;
+  font-size: 12px;
+}
+
+.btn-lg {
+  padding: 12px 24px;
+  font-size: 16px;
+}
+
+/* Button block */
+.btn-block {
+  display: flex;
+  width: 100%;
+}
+.hover-text-primary:hover {
+  color: var(--primary);
+}
+.hover-text-primary:hover .icon-global {
+  background-color: var(--primary);
+}

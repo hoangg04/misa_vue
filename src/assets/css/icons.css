@@ -1,0 +1,354 @@
+.icon-base-32 {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.icon-base-24 {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.icon-base-20{
+  width: 20px !important;
+  height: 20px !important;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.icon-trigger-base {
+  border-radius: 16px;
+  background-size: 24px;
+  overflow: unset;
+}
+
+.icon-noti-selector-box {
+  background-image: url("../icons/mnoti-selector-box.svg");
+}
+
+.icon-user-plus {
+  background-image: url("../icons/user-plus-icon.svg");
+}
+
+.icon-helpmenu-trigger {
+  background-image: url("../icons/misa-helpmenu-trigger.svg");
+}
+
+.icon-moremenu-trigger {
+  background-image: url("../icons/misa-moremenu-trigger.svg");
+}
+
+.icon-knowledge-trigger {
+  background-image: url("../icons/misa-knowledge-trigger.svg");
+}
+
+.icon-notification-version {
+  background: url("https://amisplatform.misacdn.net/apps/recruit/icon-notification-version.d5e3dc604036ed5b.svg");
+}
+
+.icon-store {
+  height: 20px;
+  aspect-ratio: 1/1;
+  background: url(https://cdnstore.misacdn.net/lib/static/cs-icon-store.svg)
+    no-repeat center;
+  background-size: 20px 20px;
+  cursor: pointer;
+}
+
+.icon-messbox-icon-message-dark {
+  background-image: url("../icons/misa-messbox-icon-message-dark.svg");
+}
+
+/* Base class cho icon sử dụng mask - tái sử dụng các thuộc tính chung */
+.icon-default {
+  width: 24px;
+  height: 24px;
+  -webkit-mask-image: url("https://amisplatform.misacdn.net/apps/recruit/assets/images/ICON.svg");
+  -moz-mask-image: url("https://amisplatform.misacdn.net/apps/recruit/assets/images/ICON.svg");
+  -ms-mask-image: url("https://amisplatform.misacdn.net/apps/recruit/assets/images/ICON.svg");
+  -o-mask-image: url("https://amisplatform.misacdn.net/apps/recruit/assets/images/ICON.svg");
+  -webkit-mask-repeat: no-repeat;
+  -moz-mask-repeat: no-repeat;
+  -ms-mask-repeat: no-repeat;
+  -o-mask-repeat: no-repeat;
+  background-color: #c5ccd5;
+}
+
+/* Class cụ thể - chỉ chứa các thuộc tính khác biệt, kế thừa từ .icon-default */
+.icon-sb-recruiment {
+  -webkit-mask-position: -94px -113px;
+  -moz-mask-position: -94px -113px;
+  -ms-mask-position: -94px -113px;
+  -o-mask-position: -94px -113px;
+}
+
+.icon-sb-candidate-active {
+  -webkit-mask-position: -24px -112px;
+  -moz-mask-position: -24px -112px;
+  -ms-mask-position: -24px -112px;
+  -o-mask-position: -24px -112px;
+  background-color: #ffffff;
+}
+
+.icon-sb-calendar {
+  -webkit-mask-position: -144px -113px;
+  -moz-mask-position: -144px -113px;
+  -ms-mask-position: -144px -113px;
+  -o-mask-position: -144px -113px;
+}
+
+.icon-sb-talent-pools {
+  -webkit-mask-position: 0px -112px;
+  -moz-mask-position: 0px -112px;
+  -ms-mask-position: 0px -112px;
+  -o-mask-position: 0px -112px;
+}
+
+.icon-sb-recruitment-campaign-active {
+  width: 22px;
+  height: 22px;
+  -webkit-mask-position: -73px -633px;
+  -moz-mask-position: -73px -633px;
+  -ms-mask-position: -73px -633px;
+  -o-mask-position: -73px -633px;
+  background-color: #ffffff;
+}
+
+.icon-sb-task {
+  -webkit-mask-position: -336px -113px;
+  -moz-mask-position: -336px -113px;
+  -ms-mask-position: -336px -113px;
+  -o-mask-position: -336px -113px;
+}
+
+.icon-email-ai-marketing {
+  -webkit-mask-position: -160px -248px;
+  -moz-mask-position: -160px -248px;
+  -ms-mask-position: -160px -248px;
+  -o-mask-position: -160px -248px;
+}
+
+.icon-chat-box {
+  -webkit-mask-position: -72px -845px;
+  -moz-mask-position: -72px -845px;
+  -ms-mask-position: -72px -845px;
+  -o-mask-position: -72px -845px;
+}
+
+.icon-sb-report {
+  -webkit-mask-position: -72px -113px;
+  -moz-mask-position: -72px -113px;
+  -ms-mask-position: -72px -113px;
+  -o-mask-position: -72px -113px;
+}
+
+.icon-sb-setting {
+  -webkit-mask-position: 0px -136px;
+  -moz-mask-position: 0px -136px;
+  -ms-mask-position: 0px -136px;
+  -o-mask-position: 0px -136px;
+}
+
+.icon-left {
+  -webkit-mask-position: -60px -696px;
+  -moz-mask-position: -60px -696px;
+  -ms-mask-position: -60px -696px;
+  -o-mask-position: -60px -696px;
+  width: 20px;
+  height: 20px;
+}
+
+.icon-filter {
+  width: 20px;
+  height: 20px;
+  background-color: #7a8188 !important;
+  -webkit-mask-position: -40px -656px;
+  -moz-mask-position: -40px -656px;
+  -ms-mask-position: -40px -656px;
+  -o-mask-position: -40px -656px;
+}
+
+.icon-export {
+  width: 20px;
+  height: 20px;
+  background-color: #7a8188 !important;
+  -webkit-mask-position: -60px -656px;
+  -moz-mask-position: -60px -656px;
+  -ms-mask-position: -60px -656px;
+  -o-mask-position: -60px -656px;
+}
+
+.icon-interactive-history {
+  width: 24px;
+  height: 24px;
+  background-color: #7a8188 !important;
+  -webkit-mask-position: 0 -844px;
+  -moz-mask-position: 0 -844px;
+  -ms-mask-position: 0 -844px;
+  -o-mask-position: 0 -844px;
+}
+
+.icon-setting-column {
+  width: 24px;
+  height: 24px;
+  padding: 5px;
+  background-color: #7a8188 !important;
+  -webkit-mask-position: -24px -608px;
+  -moz-mask-position: -24px -608px;
+  -ms-mask-position: -24px -608px;
+  -o-mask-position: -24px -608px;
+}
+
+.icon-switch-app {
+  background-image: url("https://amisplatform.misacdn.net/apps/recruit/icon-swich-app-white.248ca01677e3e31a.svg");
+}
+.icon-add {
+  height: 20px;
+  width: 20px;
+  -webkit-mask-position: -20px -656px;
+  -moz-mask-position: -20px -656px;
+  -ms-mask-position: -20px -656px;
+  -o-mask-position: -20px -656px;
+}
+.icon-down {
+  width: 16px;
+  height: 16px;
+  -webkit-mask-position: -32px -48px;
+  -moz-mask-position: -32px -48px;
+  -ms-mask-position: -32px -48px;
+  -o-mask-position: -32px -48px;
+}
+.icon-edit {
+  width: 20px;
+  height: 20px;
+  -webkit-mask-position: -180px -656px;
+  -moz-mask-position: -180px -656px;
+  -ms-mask-position: -180px -656px;
+  -o-mask-position: -180px -656px;
+}
+
+.icon-checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  width: 20px !important;
+  height: 20px !important;
+  border-radius: 4px;
+  border: 2px solid #7a8188;
+  background-color: transparent;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.icon-checkbox-checked {
+  border-color: #2680eb;
+  background-color: #2680eb;
+  width: 20px !important;
+  height: 20px !important;
+  border-radius: 4px;
+}
+
+.checkbox-checkmark {
+  display: none;
+  width: 12px;
+  height: 12px;
+  position: relative;
+}
+
+.checkbox-checkmark::after {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: -2px;
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.icon-closed {
+  width: 22px;
+  height: 22px;
+  -webkit-mask-position: -73px -136px;
+  -moz-mask-position: -73px -136px;
+  -ms-mask-position: -73px -136px;
+  -o-mask-position: -73px -136px;
+  background-color: #666666;
+}
+.icon-right {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  -webkit-mask-position: -40px -696px;
+  -moz-mask-position: -40px -696px;
+  -ms-mask-position: -40px -696px;
+  -o-mask-position: -40px -696px;
+  background-color: #7a8188;
+}
+
+.icon-left {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  -webkit-mask-position: -60px -696px;
+  -moz-mask-position: -60px -696px;
+  -ms-mask-position: -60px -696px;
+  -o-mask-position: -60px -696px;
+  background-color: #7a8188;
+}
+.icon-dot-import {
+  width: 15px;
+  min-width: 15px;
+  height: 15px;
+  -webkit-mask-position: -305px -33px;
+  -moz-mask-position: -305px -33px;
+  -ms-mask-position: -305px -33px;
+  -o-mask-position: -305px -33px;
+}
+.icon-email {
+  -webkit-mask-position: -260px -656px;
+  -moz-mask-position: -260px -656px;
+  -ms-mask-position: -260px -656px;
+  -o-mask-position: -260px -656px;
+  background-color: #7a8188;
+}
+.icon-search {
+	-webkit-mask-position: -283px -945px;
+  -moz-mask-position: -283px -945px;
+  -ms-mask-position: -283px -945px;
+  -o-mask-position: -283px -945px;
+  width: 14px;
+  height: 14px;
+  background-color: #7a8188;
+}
+.icon-global {
+  width: 20px;
+  height: 21px;
+  min-width: 20px;
+  -webkit-mask-image: url("https://amisplatform.misacdn.net/apps/recruit/assets/images/ICON.svg");
+  -moz-mask-image: url("https://amisplatform.misacdn.net/apps/recruit/assets/images/ICON.svg");
+  -ms-mask-image: url("https://amisplatform.misacdn.net/apps/recruit/assets/images/ICON.svg");
+  -o-mask-image: url("https://amisplatform.misacdn.net/apps/recruit/assets/images/ICON.svg");
+  -webkit-mask-position: 0px -608px;
+  -moz-mask-position: 0px -608px;
+  -ms-mask-position: 0px -608px;
+  -o-mask-position: 0px -608px;
+  -webkit-mask-repeat: no-repeat;
+  -moz-mask-repeat: no-repeat;
+  -ms-mask-repeat: no-repeat;
+  -o-mask-repeat: no-repeat;
+  -webkit-mask-image: url("https://amisplatform.misacdn.net/apps/recruit/assets/images/ICON.svg");
+  -webkit-mask-position: 0px -608px;
+  -webkit-mask-repeat: no-repeat;
+  background-color: #7a8188;
+}
