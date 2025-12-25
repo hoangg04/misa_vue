@@ -18,3 +18,27 @@ export const formatDate = (value: unknown): string => {
  */
 export const formatValueCell = (value: unknown): string =>
   value === null || value === undefined || value === '' ? '--' : (value as string)
+
+export const formatDateToISO = (value?: string): string => {
+  if (!value) return ''
+  const [datePart] = new Date(value || '').toISOString().split('T')
+  return datePart ?? ''
+}
+export function partsToISO(
+  year: number | string,
+  month: number | string,
+  birthday: number | string,
+): string {
+  return [year, String(month).padStart(2, '0'), String(birthday).padStart(2, '0')].join('-')
+}
+
+export const convertISOToParts = (
+  value: string,
+): { year: number; month: number; birthday: number } => {
+  const [year, month, birthday] = value.split('-')
+  return {
+    year: parseInt(year || '0'),
+    month: parseInt(month || '0'),
+    birthday: parseInt(birthday || '0'),
+  }
+}

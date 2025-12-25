@@ -14,7 +14,6 @@ const model = defineModel<boolean>()
 <style scoped>
 /* Checkbox wrapper styles - only for table checkboxes */
 .checkbox-wrapper {
-  width: 50px;
   padding: 0;
   display: flex;
   align-items: center;

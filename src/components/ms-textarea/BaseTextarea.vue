@@ -2,11 +2,10 @@
 import { computed } from 'vue'
 
 defineOptions({
-  name: 'BaseInput',
+  name: 'BaseTextarea',
 })
 
 type Props = {
-  type?: string
   placeholder?: string
   disabled?: boolean
   name?: string
@@ -16,7 +15,6 @@ type Props = {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  type: 'text',
   placeholder: '',
   disabled: false,
   name: undefined,
@@ -34,7 +32,7 @@ const model = computed({
   set: (value) => emit('update:modelValue', value),
 })
 
-const inputClasses = computed(() => {
+const textareaClasses = computed(() => {
   const baseClass = props.class || ''
   const errorClass = props.error ? 'is-error' : ''
   return [baseClass, errorClass].filter(Boolean)
@@ -42,12 +40,12 @@ const inputClasses = computed(() => {
 </script>
 
 <template>
-  <input
-    :type="type"
-    :disabled="disabled"
+  <textarea
     :name="name"
+    :disabled="disabled"
     :placeholder="placeholder"
-    :class="inputClasses"
+    :class="textareaClasses"
     v-model="model"
-  />
+  ></textarea>
 </template>
+

@@ -1,6 +1,5 @@
 import storage from './storage'
+import type { CandidateType } from '@/types/candicates'
 
-export const candidateDataStorage = storage('candicateData')
-export const candidateFormStateStorage = storage('candidateFormState')
-export const candidateDraftStorage = storage('candidate_draft')
-export const sidebarStateStorage = storage('sidebarState')
+export const candidateDataStorage = storage<{ Candidates: CandidateType[] }>('candicateData')
+export const sidebarStateStorage = storage<string>('sidebarState')

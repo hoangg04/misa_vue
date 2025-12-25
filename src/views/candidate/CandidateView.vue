@@ -4,6 +4,7 @@ import CandidateTable from './CandidataTable.vue'
 import BaseDialog from '@/components/ms-dialog/BaseDialog.vue'
 import type { CandidateType } from '@/types/candicates'
 import CandidateForm from './CandidateForm.vue'
+import { candidateDataStorage } from '@/utils/instances'
 const stateDialog = reactive<{
   isOpen: boolean
   mode: 'add' | 'edit'
@@ -13,6 +14,9 @@ const stateDialog = reactive<{
 })
 const currentCandidate = ref<CandidateType | null>(null)
 
+// Ref tới CandidateTable để có thể gọi reload() sau khi thêm/sửa
+const candidateTableRef = ref<InstanceType<typeof CandidateTable> | null>(null)
+
 // Ref tới CandidateForm để có thể gọi submit() khi bấm nút Lưu ở footer dialog
 const candidateFormRef = ref<InstanceType<typeof CandidateForm> | null>(null)
 function handleEditRow(row: CandidateType) {
@@ -21,8 +25,34 @@ function handleEditRow(row: CandidateType) {
   currentCandidate.value = row
 }
 function handleSubmit(candidate: CandidateType) {
-  console.log('candidate', candidate)
+  const candidates = candidateDataStorage.get({ Candidates: [] } as { Candidates: CandidateType[] })
+  if (stateDialog.mode === 'add') {
+    candidateDataStorage.set({
+      Candidates: [candidate, ...candidates.Candidates],
+    })
+  } else {
+    candidates.Candidates = candidates.Candidates.map((c) =>
+      c.CandidateID === candidate.CandidateID
+        ? {
+            ...c,
+            ...candidate,
+            IsTalentPoolDetail: candidate.IsTalentPoolDetail ? 1 : 0,
+          }
+        : c,
+    )
+    candidateDataStorage.set({
+      Candidates: candidates.Candidates,
+    })
+  }
   stateDialog.isOpen = false
+  currentCandidate.value = null
+  // Reload lại dữ liệu bảng sau khi cập nhật storage
+  candidateTableRef.value?.reload?.()
+}
+
+function handleCloseDialog() {
+  stateDialog.isOpen = false
+  currentCandidate.value = null
 }
 </script>
 <template>
@@ -43,34 +73,12 @@ function handleSubmit(candidate: CandidateType) {
     </div>
   </div>
   <div class="main__content">
-    <div class="flex justify-between items-center main__content-filter">
-      <div class="main__content-search">
-        <div class="input-search-wrapper">
-          <span class="input-search__icon input-search__icon--animated"></span>
-          <input type="text" class="input-search" placeholder="Tìm kiếm hoặc nhờ AI trợ giúp" />
-        </div>
-      </div>
-      <div class="main__toolbar flex gap-2">
-        <div class="main__toolbar-btn">
-          <button class="icon-default icon-filter" title="Lọc"></button>
-        </div>
-        <div class="main__toolbar-btn">
-          <button class="icon-default icon-export" title="Xuất"></button>
-        </div>
-        <div class="main__toolbar-btn">
-          <button class="icon-default icon-interactive-history" title="Làm mới"></button>
-        </div>
-        <div class="main__toolbar-btn">
-          <button class="icon-default icon-setting-column" title="Cài đặt"></button>
-        </div>
-      </div>
-    </div>
-    <CandidateTable @edit:row="handleEditRow" />
+    <CandidateTable ref="candidateTableRef" @edit:row="handleEditRow" />
   </div>
   <BaseDialog
     :isOpen="stateDialog.isOpen"
     :title="stateDialog.mode === 'add' ? 'Thêm ứng viên' : 'Sửa ứng viên'"
-    @close="stateDialog.isOpen = false"
+    @close="handleCloseDialog"
   >
     <template #default>
       <CandidateForm
@@ -81,11 +89,7 @@ function handleSubmit(candidate: CandidateType) {
       />
     </template>
     <template #footer>
-      <button
-        class="btn btn-secondary btn-cancel"
-        id="btn-cancel"
-        @click="stateDialog.isOpen = false"
-      >
+      <button class="btn btn-cancel" id="btn-cancel" @click="stateDialog.isOpen = false">
         Hủy
       </button>
       <button class="btn btn-primary btn-save" id="btn-save" @click="candidateFormRef?.submit()">

@@ -1,11 +1,9 @@
 /**
  * Creates a storage instance for managing JSON data in localStorage.
  * @param {string} key - The localStorage key to use for storage operations.
- * @returns {Object} Storage instance with get and set methods.
+ * @returns Storage instance with typed `get` and `set` methods.
  */
-const storage = (
-  key: string,
-): { get: (fallback: unknown) => typeof fallback; set: (value: unknown) => boolean } => {
+const storage = <T>(key: string): { get: (fallback: T) => T; set: (value: T) => boolean } => {
   /**
    * Checks if localStorage is available in the current environment.
    * @returns {boolean} True if localStorage is available, false otherwise.
@@ -29,12 +27,12 @@ const storage = (
      * @param {*} fallback - Value to return if key doesn't exist or parsing fails.
      * @returns {*} Parsed JSON data or fallback value.
      */
-    get: (fallback: unknown = null): unknown => {
+    get: (fallback: T): T => {
       if (!enabled || !key) return fallback
       try {
         const raw = window.localStorage.getItem(key)
         if (raw === null) return fallback
-        return JSON.parse(raw)
+        return JSON.parse(raw) as T
       } catch {
         return fallback
       }
@@ -45,7 +43,7 @@ const storage = (
      * @param {*} value - Data to serialize and store.
      * @returns {boolean} True if successful, false otherwise.
      */
-    set: (value: unknown): boolean => {
+    set: (value: T): boolean => {
       if (!enabled || !key) return false
       try {
         const serialized = JSON.stringify(value)

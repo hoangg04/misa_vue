@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { candidateDataStorage } from '@/utils/instances'
-import { onMounted, ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import { Candidates as candidatesData } from '@/assets/data/candicate.json'
 import {
   AREAS,
@@ -13,22 +13,8 @@ import type { FieldType } from '@/types/baseTable'
 import type { CandidateType } from '@/types/candicates'
 import BaseTable from '@/components/ms-table/BaseTable.vue'
 import NameCell from './components/NameCell.vue'
-import randomColor from '@/utils/randomColor'
 import BaseRating from '@/components/ms-rating/BaseRating.vue'
 
-const avatarColorCache = new Map<string, string>()
-/**
- * Gets or generates a color for a candidate name.
- * @param {string} name - Candidate name.
- * @returns {string} Color hex code.
- */
-const getAvatarColor = (name: string): string => {
-  if (!name) return randomColor()
-  if (!avatarColorCache.has(name)) {
-    avatarColorCache.set(name, randomColor())
-  }
-  return avatarColorCache.get(name)!
-}
 const fields: FieldType<CandidateType>[] = [
   {
     label: 'Họ và tên',
@@ -138,34 +124,93 @@ const fields: FieldType<CandidateType>[] = [
   },
 ]
 const candidates = ref<CandidateType[]>([])
+const query = reactive<{
+  total: number
+  limit: number
+  page: number
+  searchText: string
+}>({
+  total: 0,
+  limit: 25,
+  page: 1,
+  searchText: '',
+})
 const emit = defineEmits<{
   (e: 'edit:row', row: CandidateType): void
 }>()
-onMounted(() => {
-  const initialCandidates = candidateDataStorage.get([] as CandidateType[]) as CandidateType[]
-  console.log(initialCandidates)
-  if (candidates.value.length === 0) {
-    candidateDataStorage.set({
-      Candidates: candidatesData,
+
+// Hàm reload để đọc lại dữ liệu từ storage
+const reload = () => {
+  const stored = candidateDataStorage.get({ Candidates: [] } as { Candidates: CandidateType[] })
+  if(query.searchText) {
+    stored.Candidates = stored.Candidates.filter((candidate) => {
+      const searchText = query.searchText.toLowerCase()
+      return (
+        (typeof candidate.CandidateName === 'string' && candidate.CandidateName.toLowerCase().includes(searchText)) ||
+        (typeof candidate.Mobile === 'string' && candidate.Mobile.toLowerCase().includes(searchText)) ||
+        (typeof candidate.Email === 'string' && candidate.Email.toLowerCase().includes(searchText)) ||
+        (typeof candidate.ChannelName === 'string' && candidate.ChannelName.toLowerCase().includes(searchText)) ||
+        (typeof candidate.RecruitmentCampaignNames === 'string' && candidate.RecruitmentCampaignNames.toLowerCase().includes(searchText)) ||
+        (typeof candidate.JobPositionName === 'string' && candidate.JobPositionName.toLowerCase().includes(searchText))
+      )
     })
-    candidates.value = candidatesData.map((candidate) => ({
-      ...candidate,
-      id: candidate.CandidateID as number,
-      isHighlighted: candidate.IsEmployee || false,
-    })) as CandidateType[]
-  } else {
-    candidates.value = initialCandidates.map((candidate) => ({
-      ...candidate,
-      id: candidate.CandidateID as number,
-      isHighlighted: candidate.IsEmployee || false,
-    })) as CandidateType[]
   }
+  candidates.value = stored.Candidates.slice(
+    (query.page - 1) * query.limit,
+    query.page * query.limit,
+  )
+  query.total = stored.Candidates.length
+}
+
+onMounted(() => {
+  const stored = candidateDataStorage.get({ Candidates: [] } as { Candidates: CandidateType[] })
+  // Nếu chưa có dữ liệu trong storage thì seed từ file JSON
+  if (!stored.Candidates || !stored.Candidates.length) {
+    candidateDataStorage.set({ Candidates: candidatesData } as unknown as {
+      Candidates: CandidateType[]
+    })
+  }
+  reload()
+})
+
+// Cho phép cha (CandidateView) gọi reload()
+defineExpose({
+  reload,
 })
 const handleEditRow = (row: CandidateType) => {
-  emit('edit:row', row)
+  emit(
+    'edit:row',
+    candidates.value.find(
+      (candidate) => candidate.CandidateID === row.CandidateID,
+    ) as CandidateType,
+  )
 }
 const handleDeleteRow = (id: string | number) => {
   console.log(id)
+}
+const handleSelectRows = (data: unknown) => {
+  return data
+}
+const handleNextPage = () => {
+  if (query.page < Math.ceil(query.total / query.limit)) {
+    query.page++
+  }
+  reload()
+}
+const handlePrevPage = () => {
+  if (query.page > 1) {
+    query.page--
+  }
+  reload()
+}
+const handleChangeLimit = (limit: number) => {
+  query.limit = limit
+  reload()
+}
+const handleSearchText = (text: string) => {
+  query.searchText = text
+  query.page = 1
+  reload()
 }
 </script>
 
@@ -176,6 +221,7 @@ const handleDeleteRow = (id: string | number) => {
       candidates.map((candidate) => {
         return {
           ...candidate,
+          id: candidate.CandidateID as number,
           EducationMajorName:
             EDUCATION_MAJORS[candidate.EducationMajorName as keyof typeof EDUCATION_MAJORS] || '--',
           EducationDegreeName:
@@ -190,14 +236,20 @@ const handleDeleteRow = (id: string | number) => {
         }
       }) as CandidateType[]
     "
+    :query="query"
     @edit:row="handleEditRow"
     @delete:row="handleDeleteRow"
+    @select:rows="handleSelectRows"
+    @next:page="handleNextPage"
+    @prev:page="handlePrevPage"
+    @change:limit="handleChangeLimit"
+    @search:text="handleSearchText"
   >
     <template #CandidateName="{ row }">
       <NameCell
         :name="String(row.CandidateName || '--')"
         :unreadEmailQuantity="Number(row.UnreadEmailQuantity) || 0"
-        :avatarColor="getAvatarColor(String(row.CandidateName || '--'))"
+        :avatarColor="(row.AvatarColor as string) || '#39C5AB'"
       ></NameCell>
     </template>
     <template #Score="{ row }">

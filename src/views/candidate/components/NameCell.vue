@@ -14,34 +14,10 @@ const props = withDefaults(defineProps<Props>(), {
   unreadEmailQuantity: 0,
   avatarColor: '',
 })
-// const renderName = (name: string, unreadEmailQuantity: number = 0): VNode => {
-//   const children = [
-//     h(
-//       'span',
-//       {
-//         class: 'table__name-avatar',
-//         style: { backgroundColor: getAvatarColor(name) },
-//       },
-//       getInitials(name),
-//     ),
-//     h('span', { class: 'table__name-text' }, name || '--'),
-//   ]
-
-//   if (unreadEmailQuantity > 0) {
-//     children.push(
-//       h('div', { class: 'relative' }, [
-//         h('div', { class: 'icon-default icon-base-20 icon-email' }),
-//         h('span', { class: 'unread-email-quantity' }, unreadEmailQuantity || 0),
-//       ]),
-//     )
-//   }
-
-//   return h('div', { class: 'table__name' }, children)
-// }
 </script>
 <template>
   <div class="table__name">
-    <div class="table__name-avatar" :style="{ backgroundColor: props.avatarColor }">
+    <div class="table__name-avatar" :style="{ backgroundColor: props.avatarColor || '#39C5AB' }">
       {{ getInitials(props.name) }}
     </div>
     <span class="table__name-text">{{ props.name }}</span>

@@ -3,7 +3,9 @@ type RuleFn = (value: unknown) => boolean
 export default class ValidateBuilder {
   private errors: string[] = []
   private rules: RuleFn[] = []
-
+  private isOptional: boolean = false
+  public isRequired: boolean = false
+  private defaultValue: unknown = null
   private error(message: string): false {
     this.errors.push(message)
     return false
@@ -24,6 +26,7 @@ export default class ValidateBuilder {
   }
 
   public required(message: string): this {
+    this.isRequired = true
     return this.addRule((value: unknown) => {
       if (value === null || value === undefined || value === '') {
         return this.error(message)
@@ -121,6 +124,12 @@ export default class ValidateBuilder {
     return this.regex(regex, message)
   }
 
+  public optional(defaultValue: unknown = null): this {
+    this.isOptional = true
+    this.defaultValue = defaultValue
+    return this
+  }
+
   public check(value: unknown): {
     isValid: boolean
     errors: string[]
@@ -129,6 +138,10 @@ export default class ValidateBuilder {
     this.errors = []
     let isValid = true
 
+    // If optional and value is empty, skip all validations
+    if (this.isOptional && (value === null || value === undefined || value === '')) {
+      return { isValid: true, errors: [], value: this.defaultValue }
+    }
     for (const rule of this.rules) {
       if (!rule(value)) {
         isValid = false
@@ -154,8 +167,8 @@ export default class ValidateBuilder {
     for (const key in schema) {
       const rule = schema[key]!
       // rule chắc chắn tồn tại vì vừa lấy từ schema (non-null assertion)
-      const element = values[key]
-      const { isValid: isValidRule, errors: errorsRule } = rule.check(element)
+      const value = values[key]
+      const { isValid: isValidRule, errors: errorsRule } = rule.check(value)
       if (!isValidRule) {
         isValid = false
         errors.push({

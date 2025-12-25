@@ -1,4 +1,10 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+import BaseCheckbox from '../ms-checkbox/BaseCheckbox.vue'
+import BaseInput from '../ms-input/BaseInput.vue'
+import BaseSelect from '../ms-select/BaseSelect.vue'
+import BaseTextarea from '../ms-textarea/BaseTextarea.vue'
+
 defineOptions({
   name: 'InputField',
 })
@@ -8,71 +14,63 @@ type Props = {
   type?: string
   placeholder?: string
   error?: string | null
-  labelClass?: string
-  inputClass?: string
+  labelAttribute?: {
+    style?: string | string[]
+    class?: string | string[]
+  }
+  controlAttribute?: {
+    style?: string | string[]
+    class?: string | string[]
+  }
   errorClass?: string
-  wrapperClass?: string
+  wrapperAttribute?: {
+    style?: string | string[]
+    class?: string | string[]
+  }
   required?: boolean
   disabled?: boolean
   // layout: hướng hiển thị label/input, tránh trùng với HTML style attribute
   layout?: 'horizontal' | 'vertical'
+  reverse?: boolean
 }
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   label: '',
   fieldKey: '',
   type: 'text',
   placeholder: 'Nhập thông tin',
   error: null,
-  labelClass: '',
-  inputClass: '',
-  errorClass: '',
-  wrapperClass: '',
+  labelAttribute: undefined,
+  controlAttribute: undefined,
+  errorClass: undefined,
+  wrapperAttribute: undefined,
   required: false,
   layout: 'vertical',
+  reverse: false,
 })
 
 // Model dùng cho các control text/select/textarea/checkbox
 // Cho phép null/boolean để khớp với kiểu dữ liệu của CandidateType,
 // khi bind vào DOM sẽ cast sang any để tránh lỗi kiểu của input/select/checkbox.
-const model = defineModel<string | number | boolean | null | undefined>({
-  default: '',
+const model = defineModel<string | number | boolean | null | undefined>()
+const layoutClass = computed(() => {
+  return [
+    props.wrapperAttribute?.class,
+    props.layout === 'vertical' ? 'flex-col' : '',
+    props.reverse ? (props.layout === 'horizontal' ? 'flex-row-reverse' : 'flex-col-reverse') : '',
+  ]
 })
 </script>
 <template>
-  <div class="form-group" :class="[wrapperClass, layout === 'vertical' ? 'flex-col' : '']">
+  <div class="form-group" :class="layoutClass">
     <label
-      class="form-label"
-      :class="[labelClass, required ? 'form-label--required' : '']"
+      :class="[labelAttribute?.class, required ? 'form-label--required' : '', 'form-label']"
+      :style="labelAttribute?.style"
       :data-required="required"
-      >{{ label }}</label
     >
-    <div class="flex flex-col">
-      <!--
-        Ưu tiên hiển thị theo loại control:
-        - Nếu truyền slot "select"  => hiển thị select
-        - Nếu truyền slot "textarea" => hiển thị textarea
-        - Nếu truyền slot "checkbox" => hiển thị checkbox
-        - Ngược lại: dùng input mặc định
-
-        Cách dùng ở component cha:
-        - Mặc định input:
-          <FormGroup v-model="form.CandidateName" label="Họ và tên" fieldKey="CandidateName" />
-
-        - Dùng select mặc định bên trong:
-          <FormGroup v-model="form.Gender" label="Giới tính" fieldKey="Gender">
-            <template #select></template>
-          </FormGroup>
-
-        - Tự custom select:
-          <FormGroup v-model="form.Gender" label="Giới tính" fieldKey="Gender">
-            <template #select="{ model, fieldKey }">
-              <select class="form-select" :name="fieldKey" v-model="model">
-                ...
-              </select>
-            </template>
-          </FormGroup>
-      -->
-
+      <slot v-if="$slots.label" name="label"></slot>
+      {{ label }}
+    </label>
+    <div class="form-control" :class="controlAttribute?.class" :style="controlAttribute?.style">
       <!-- SELECT -->
       <template v-if="$slots.select || $slots['select-options']">
         <slot
@@ -80,22 +78,21 @@ const model = defineModel<string | number | boolean | null | undefined>({
           :model="model"
           :fieldKey="fieldKey"
           :disabled="disabled"
-          :inputClass="inputClass"
           :placeholder="placeholder"
           :error="error"
         >
-          <select
+          <BaseSelect
             class="form-select"
-            :class="inputClass"
             :name="fieldKey"
             :disabled="disabled"
+            :error="error"
+            :placeholder="`Chọn ${label.toLowerCase()}`"
             v-model="model as any"
           >
-            <!-- Cho phép custom options qua slot riêng nếu cần -->
             <slot name="select-options">
               <option value="">Chọn {{ label.toLowerCase() }}</option>
             </slot>
-          </select>
+          </BaseSelect>
         </slot>
       </template>
 
@@ -106,41 +103,31 @@ const model = defineModel<string | number | boolean | null | undefined>({
           :model="model"
           :fieldKey="fieldKey"
           :disabled="disabled"
-          :inputClass="inputClass"
           :placeholder="placeholder"
           :error="error"
         >
-          <textarea
+          <BaseTextarea
             class="form-textarea"
-            :class="inputClass"
             :name="fieldKey"
             :placeholder="placeholder"
             :disabled="disabled"
+            :error="error"
             v-model="model as any"
-          ></textarea>
+          />
         </slot>
       </template>
 
-      <!-- CHECKBOX -->
       <template v-else-if="$slots.checkbox">
         <slot
           name="checkbox"
           :model="model"
           :fieldKey="fieldKey"
           :disabled="disabled"
-          :inputClass="inputClass"
           :placeholder="placeholder"
           :error="error"
         >
           <div class="flex items-center gap-2">
-            <input
-              type="checkbox"
-              class="form-input"
-              :class="inputClass"
-              :name="fieldKey"
-              :disabled="disabled"
-              v-model="model as any"
-            />
+            <base-checkbox v-model="model as any" />
           </div>
         </slot>
       </template>
@@ -153,17 +140,16 @@ const model = defineModel<string | number | boolean | null | undefined>({
           :fieldKey="fieldKey"
           :type="type"
           :disabled="disabled"
-          :inputClass="inputClass"
           :placeholder="placeholder"
           :error="error"
         >
-          <input
+          <BaseInput
             :type="type"
             :disabled="disabled"
             class="form-input"
-            :class="inputClass"
             :name="fieldKey"
             :placeholder="placeholder"
+            :error="error"
             v-model="model as any"
           />
         </slot>
@@ -178,30 +164,35 @@ const model = defineModel<string | number | boolean | null | undefined>({
 
 <style scoped>
 .form-group {
-  margin: 8px 0px;
   display: flex;
 }
 
 .form-label {
-  display: block;
+  display: inline-flex;
+  align-items: center;
   font-size: 14px;
   height: 25px;
   line-height: 25px;
   font-weight: 600;
   color: #1f2937;
-  margin-bottom: 6px;
+}
+.form-control {
+  display: flex;
+  flex-direction: column;
 }
 
 .form-label--required::after {
   content: ' *';
   color: #ef4444;
+  margin-left: 4px;
+  margin-top: 4px;
 }
 
 .form-input,
 .form-select,
 .form-textarea {
   width: 100%;
-  height: 32px;
+  height: 34px;
   /* Requested height */
   padding: 0 12px;
   border: 1px solid #d1d5db;
@@ -214,6 +205,26 @@ const model = defineModel<string | number | boolean | null | undefined>({
   font-family: inherit;
 }
 
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: #9ca3af;
+}
+.form-select {
+  color: #9ca3af; /* Màu xám cho placeholder */
+}
+
+.form-select option:first-child {
+  color: #9ca3af; /* Màu xám cho option placeholder */
+}
+
+.form-select option:not(:first-child) {
+  color: #1e2633; /* Màu đen cho các option khác */
+}
+
+/* Màu đen khi đã chọn giá trị */
+.form-select.has-value {
+  color: #1e2633;
+}
 .form-textarea {
   height: auto;
   min-height: 80px;
@@ -238,5 +249,18 @@ const model = defineModel<string | number | boolean | null | undefined>({
   font-size: 12px;
   margin-top: 4px;
   min-height: 16px;
+}
+
+.form-input.is-error,
+.form-select.is-error,
+.form-textarea.is-error {
+  border-color: #ef4444;
+}
+
+.form-input.is-error:focus,
+.form-select.is-error:focus,
+.form-textarea.is-error:focus {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.1);
 }
 </style>
